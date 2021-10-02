@@ -1,4 +1,5 @@
-
+mysql 测试
+=============================
 
 ## 关于域名
 
@@ -50,18 +51,22 @@ show tables;
 
 select * from mytestdb;
 
-insert into mytestdb(num,title) values(200, 'hello kubernetes'); -- 因为 --super-read-only option 一定会报错
+insert into mytestdb(num,title) values(200, 'hello xyz'); -- 因为 --super-read-only option 一定会报错
 ```
 
 ```sql
--- ALL: mysql -uroot -proot123 -hmy-cluster-mysql -P3306
+-- SLAVE ALL: mysql -uroot -proot123 -hmy-cluster-mysql -P3306
+show databases;
+
 use mytestdb;
 
 show tables;
 
 select * from mytestdb;
 
-insert into mytestdb(num,title) values(200, 'hello kubernetes'); -- 因为 --super-read-only option 一定会报错
+select count(*) from mytestdb;
+
+insert into mytestdb(num,title) values(200, 'hello xyz'); -- 因为 --super-read-only option 一定会报错
 ```
 
 
