@@ -158,7 +158,7 @@ orchestrator:
     RecoverMasterClusterFilters: ['.*']
     RecoverIntermediateMasterClusterFilters: ['.*']
     # `reset slave all` and `set read_only=0` on promoted master
-    ApplyMySQLPromotionAfterMasterFailover: false
+    ApplyMySQLPromotionAfterMasterFailover: true
     MasterFailoverDetachReplicaMasterHost: true
     # https://github.com/github/orchestrator/blob/master/docs/configuration-recovery.md#promotion-actions
     # Safety! do not disable unless you know what you are doing
