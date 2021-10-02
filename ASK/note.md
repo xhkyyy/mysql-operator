@@ -18,6 +18,29 @@ kubectl run -i --tty busybox --image=busybox --restart=Never --rm=true -- sh
 * 读请求：telnet `my-cluster-mysql` 3306   telnet `my-cluster-mysql-replicas` 3306
 
 
+kubectl run -i --tty mysql --image=mysql:5.7.35 --restart=Never --rm=true -- sh
+
+```sql
+-- mysql -uroot -proot123 -hmy-cluster-mysql-master -P3306
+show databases;
+
+CREATE DATABASE mytestdb CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS mytestdb (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    num INT,
+    title VARCHAR(50)
+)  ENGINE=INNODB;
+
+show tables;
+
+insert into mytestdb(num,title) values(100, 'hello mysql');
+
+select * from mytestdb;
+
+select count(*) from mytestdb;
+
+```
 
 
 
