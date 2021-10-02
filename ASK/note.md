@@ -21,7 +21,7 @@ kubectl run -i --tty busybox --image=busybox --restart=Never --rm=true -- sh
 kubectl run -i --tty mysql --image=mysql:5.7.35 --restart=Never --rm=true -- sh
 
 ```sql
--- mysql -uroot -proot123 -hmy-cluster-mysql-master -P3306
+-- MASTER: mysql -uroot -proot123 -hmy-cluster-mysql-master -P3306
 show databases;
 
 CREATE DATABASE mytestdb CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -39,9 +39,30 @@ insert into mytestdb(num,title) values(100, 'hello mysql');
 select * from mytestdb;
 
 select count(*) from mytestdb;
-
 ```
 
+
+```sql
+-- SLAVE: mysql -uroot -proot123 -hmy-cluster-mysql-replicas -P3306
+use mytestdb;
+
+show tables;
+
+select * from mytestdb;
+
+insert into mytestdb(num,title) values(200, 'hello kubernetes'); -- 因为 --super-read-only option 一定会报错
+```
+
+```sql
+-- ALL: mysql -uroot -proot123 -hmy-cluster-mysql -P3306
+use mytestdb;
+
+show tables;
+
+select * from mytestdb;
+
+insert into mytestdb(num,title) values(200, 'hello kubernetes'); -- 因为 --super-read-only option 一定会报错
+```
 
 
 
