@@ -118,8 +118,8 @@ images:
 publish: images
 	set -e; \
 		for tag in $(IMAGE_TAGS); do \
-		docker push $(REGISTRY)/$(IMAGE_NAME):$${tag}; \
-		docker push $(REGISTRY)/$(SIDECAR_IMAGE_NAME):$${tag}; \
+		echo "$(REGISTRY)/$(IMAGE_NAME):$${tag}; --- push" \
+		echo "$(REGISTRY)/$(SIDECAR_IMAGE_NAME):$${tag}; --- push" \
 	done
 
 # E2E tests
