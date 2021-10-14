@@ -122,24 +122,3 @@ publish: images
 		echo "$(REGISTRY)/$(SIDECAR_IMAGE_NAME):$${tag}; --- push" \
 	done
 
-# E2E tests
-###########
-
-KUBECONFIG ?= ~/.kube/config
-K8S_CONTEXT ?= minikube
-
-e2e-local: images
-	go test ./test/e2e -v $(G_ARGS) -timeout 20m --pod-wait-timeout 60 \
-		-ginkgo.slowSpecThreshold 300 \
-		--kubernetes-config $(KUBECONFIG) --kubernetes-context $(K8S_CONTEXT) \
-		--report-dir ../../e2e-reports
-
-E2E_IMG_TAG ?= latest
-e2e-remote:
-	go test ./test/e2e -v $(G_ARGS) -timeout 50m --pod-wait-timeout 200 \
-		-ginkgo.slowSpecThreshold 300 \
-		--kubernetes-config $(KUBECONFIG) --kubernetes-context $(K8S_CONTEXT) \
-		--report-dir ../../e2e-reports \
-		--operator-image quay.io/presslabs/mysql-operator:$(E2E_IMG_TAG) \
-		--sidecar-image  quay.io/presslabs/mysql-operator-sidecar:$(E2E_IMG_TAG) \
-		--orchestrator-image  quay.io/presslabs/mysql-operator-orchestrator:$(E2E_IMG_TAG)
