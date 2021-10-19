@@ -44,18 +44,19 @@ select count(*) from mytestdb;
 
 
 ```sql
--- SLAVE: mysql -uroot -proot123 -hmy-cluster-mysql-replicas -P3306
+-- ALL SLAVE: mysql -uroot -proot123 -hmy-cluster-mysql-replicas -P3306
 use mytestdb;
 
 show tables;
 
 select * from mytestdb;
 
-insert into mytestdb(num,title) values(200, 'hello xyz'); -- 因为 --super-read-only option 一定会报错
+insert into mytestdb(num,title) values(300, 'hello xyz'); -- 因为 --super-read-only option 一定会报错
 ```
 
 ```sql
--- SLAVE ALL: mysql -uroot -proot123 -hmy-cluster-mysql -P3306
+-- ALL: mysql -uroot -proot123 -hmy-cluster-mysql -P3306
+-- 由于是代理到所有节点上，所以不应该执行更新语句。否则引发的现象是如果代理到 master 节点上，则更新成功，如果代理到 slave 节点上则更新失败！
 show databases;
 
 use mytestdb;
@@ -66,7 +67,7 @@ select * from mytestdb;
 
 select count(*) from mytestdb;
 
-insert into mytestdb(num,title) values(200, 'hello xyz'); -- 因为 --super-read-only option 一定会报错
+insert into mytestdb(num,title) values(200, 'hello xyz'); -- 可能成功，可能失败
 ```
 
 

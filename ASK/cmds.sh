@@ -4,7 +4,9 @@
 #====================================================================================================
 
 # install
-helm install mysql-operator ./charts/mysql-operator --set orchestrator.persistence.enabled=false
+# helm install mysql-operator ./charts/mysql-operator --set orchestrator.persistence.enabled=false
+helm install mysql-operator ./charts/mysql-operator
+
 
 cat <<EOF | kubectl apply -f-
 apiVersion: mysql.presslabs.org/v1alpha1

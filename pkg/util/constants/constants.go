@@ -87,10 +87,10 @@ var (
 	MysqlImageVersions = map[string]string{
 		// This version of mysql has a bug and doesn't work with the operator,
 		// see: https://github.com/presslabs/mysql-operator/issues/509
-		"5.7.29": "percona@sha256:d801123bbfaf750924f993f5c59189d144a93feb928b8aef95e541dd61c62881",
+		"5.7.29": "percona:5.7.29",
 		// Percona:5.7.26 CentOS based image
-		"5.7.26": "percona@sha256:713c1817615b333b17d0fbd252b0ccc53c48a665d4cfcb42178167435a957322",
+		"5.7.26": "percona:5.7.26",
 		// Percona:5.7.24 CentOS based image
-		"5.7.24": "percona@sha256:b3b7fb177b416563c46fe012298e042ec1607cc0539ce6014146380b0d27b08c",
+		"5.7.24": "percona:5.7.24",
 	}
 )
